@@ -1,0 +1,351 @@
+{
+	"info": {
+		"_postman_id": "6fdf12aa-0555-4266-8431-dda5be46fbfd",
+		"name": "sap concur apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19352599"
+	},
+	"item": [
+		{
+			"name": "OAuth",
+			"item": [
+				{
+					"name": "1. Obtain a Refresh token US",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "xxx",
+									"description": "Client ID",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "xxx",
+									"description": "Client Secret",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"description": "the grant type - required",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "xxx",
+									"description": "Sandbox company guid",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "xxx",
+									"description": "the request token from URI\n",
+									"type": "text"
+								},
+								{
+									"key": "credtype",
+									"value": "authtoken",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://us2.api.concursolutions.com/oauth2/v0/token",
+							"protocol": "https",
+							"host": [
+								"us2",
+								"api",
+								"concursolutions",
+								"com"
+							],
+							"path": [
+								"oauth2",
+								"v0",
+								"token"
+							]
+						},
+						"description": "The customer will click on \"Connect\" from App Center. The page that is refreshed is the re-direct URL page that the Partner provides as part of their App setup. This page is what the partner will use to get the following info in order to then make a request to get a token:\n1. UUID - the value for each company (also within HMC by clicking on entity code) when getting a Company-level JWT. \n\n2. Request Token: this value is plugged into the \"password\" key section of the Postman Body. \n\nPartner gets an Access Token, Refresh Token, ID Token, etc. They should save the Refresh token and date."
+					},
+					"response": []
+				},
+				{
+					"name": "2. Obtain an Access token US",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "xxx",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "xxx",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "xxx",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://us2.api.concursolutions.com/oauth2/v0/token",
+							"protocol": "https",
+							"host": [
+								"us2",
+								"api",
+								"concursolutions",
+								"com"
+							],
+							"path": [
+								"oauth2",
+								"v0",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users / Identity",
+			"item": [
+				{
+					"name": "GET summary list of users - Identity",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ??"
+							}
+						],
+						"url": {
+							"raw": "https://us2.api.concursolutions.com/profile/identity/v4/Users?count=20",
+							"protocol": "https",
+							"host": [
+								"us2",
+								"api",
+								"concursolutions",
+								"com"
+							],
+							"path": [
+								"profile",
+								"identity",
+								"v4",
+								"Users"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET single user by UUID - Identity",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ??"
+							}
+						],
+						"url": {
+							"raw": "https://us.api.concursolutions.com/profile/identity/v4/Users/3b870c14-9b0e-4901-adfa-4962cf133d19",
+							"protocol": "https",
+							"host": [
+								"us",
+								"api",
+								"concursolutions",
+								"com"
+							],
+							"path": [
+								"profile",
+								"identity",
+								"v4",
+								"Users",
+								"3b870c14-9b0e-4901-adfa-4962cf133d19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET profile of user - Identity",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ??"
+							}
+						],
+						"url": {
+							"raw": "https://us2.api.concursolutions.com/profile/identity/v4/Users/942f59c7-3cf5-4f0b-bf17-14878529e365",
+							"protocol": "https",
+							"host": [
+								"us2",
+								"api",
+								"concursolutions",
+								"com"
+							],
+							"path": [
+								"profile",
+								"identity",
+								"v4",
+								"Users",
+								"942f59c7-3cf5-4f0b-bf17-14878529e365"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET summary of company - legacy profile service [me?schema=] Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ??"
+							}
+						],
+						"url": {
+							"raw": "{{geolocation}}/profile/v1/me",
+							"host": [
+								"{{geolocation}}"
+							],
+							"path": [
+								"profile",
+								"v1",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET list of users - user profile (legacy user, not Profile)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ??"
+							}
+						],
+						"url": {
+							"raw": "https://us.api.concursolutions.com/users/?offset=0&limit=100&isactive=true",
+							"protocol": "https",
+							"host": [
+								"us",
+								"api",
+								"concursolutions",
+								"com"
+							],
+							"path": [
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								},
+								{
+									"key": "isactive",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
